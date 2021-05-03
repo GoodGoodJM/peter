@@ -20,8 +20,8 @@ func Apply(r *gin.Engine) {
 			Find(&registrationsGroups)
 
 		if err := exec.Error; err != nil {
-			log.Fatal(err.Error())
 			c.AbortWithStatus(500)
+			log.Fatal(err.Error())
 			return
 
 		}

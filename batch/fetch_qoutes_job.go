@@ -8,13 +8,13 @@ import (
 	"gorm.io/gorm"
 )
 
-const SLICE_SIZE = 300
+const sliceSize = 300
 
-type fetchQoutesJob struct {
+type fetchQuotesJob struct {
 	db *gorm.DB
 }
 
-func (job fetchQoutesJob) Run() {
+func (job fetchQuotesJob) Run() {
 	var registrationsGroups []models.RegistrationGroup
 	exec := job.db.
 		Model(&models.Registration{}).
@@ -29,9 +29,9 @@ func (job fetchQoutesJob) Run() {
 	}
 
 	totalLength := len(registrationsGroups)
-	for i := 0; i <= totalLength/SLICE_SIZE; i++ {
-		start := i * SLICE_SIZE
-		end := (i + 1) * SLICE_SIZE
+	for i := 0; i <= totalLength/sliceSize; i++ {
+		start := i * sliceSize
+		end := (i + 1) * sliceSize
 		if end > totalLength {
 			end = totalLength
 		}
@@ -60,7 +60,7 @@ func fetchQuotes(db *gorm.DB, slice []models.RegistrationGroup) {
 		}
 	}()
 
-	tickers := []string{}
+	var tickers []string
 	for _, registration := range slice {
 		tickers = append(tickers, registration.Symbol)
 	}
