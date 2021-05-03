@@ -6,9 +6,9 @@ import (
 )
 
 func Start(db *gorm.DB) {
-	c := cron.New(cron.WithSeconds())
+	c := cron.New()
 
-	_, err := c.AddJob("*/5 * * * * *", fetchQuotesJob{db})
+	_, err := c.AddJob("*/15 * * * *", fetchQuotesJob{db})
 
 	if err != nil {
 		panic(err)
