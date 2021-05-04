@@ -1,7 +1,7 @@
 FROM  golang:1.16-buster as builder
 
 WORKDIR /build
-COPY .. .
+COPY . .
 
 RUN go mod tidy \
     && go get -u -d -v ./...
