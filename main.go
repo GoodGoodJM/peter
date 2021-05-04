@@ -9,10 +9,7 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		panic(err)
-	}
+	_ = godotenv.Load()
 
 	db, err := database.Initialize()
 	if err != nil {
