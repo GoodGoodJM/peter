@@ -5,9 +5,15 @@ import (
 	"github.com/goodgoodjm/peter/api"
 	"github.com/goodgoodjm/peter/batch"
 	"github.com/goodgoodjm/peter/database"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		panic(err)
+	}
+
 	db, err := database.Initialize()
 	if err != nil {
 		panic(err)
